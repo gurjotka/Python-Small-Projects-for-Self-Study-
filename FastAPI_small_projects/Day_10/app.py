@@ -1,14 +1,16 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from core.security import decode_token
+from routes.auth import router as auth_router
 
 app = FastAPI()
 
+app.include_router(auth_router)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
-print("File running")
 
-@app.get("/")
+
+@app.get("/home")
 def home():
     return {"message": "FastAPI is running 🚀"}
 
